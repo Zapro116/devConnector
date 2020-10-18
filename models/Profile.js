@@ -23,7 +23,7 @@ const ProfileSchema = new Schema({
     required: true
   },
   bio:String,
-  githubUsername: String,
+  githubusername: String,
   experience:[
     {
       title:{
