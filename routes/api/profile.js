@@ -28,8 +28,7 @@ router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 
 router.get('/all',(req,res)=>{
   const errors = {};
-  Profile.find()
-    .populate('user',['name','avatar'])
+  Profile.find().populate('user',{name:1, avatar:1})
     .then(profiles => {
       if(!profiles)
       {
@@ -46,7 +45,7 @@ router.get('/all',(req,res)=>{
 router.get('/handle/:handle',(req,res)=>{
   const errors = {};
   Profile.findOne({handle:req.params.handle})
-    .populate('user',['name','avatar'])
+    .populate('user',{name:1,avatar:1})
     .then(profile => {
       if(!profile)
       {
@@ -55,9 +54,7 @@ router.get('/handle/:handle',(req,res)=>{
       }
       res.json(profile);
     })
-    .catch(
-      err => res.status(400).json(err)
-    );
+    .catch(err => res.status(400).json(err));
 });
 
 
